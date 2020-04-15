@@ -23,7 +23,7 @@ const Header = () => {
                     {isLoggedin ?
                         <>
                             <NavLink href="/employee">Employee</NavLink>
-                            <NavLink href="/email">email</NavLink>
+                            <NavLink href="/email">Email</NavLink>
                         </>
                         :
                         null}
