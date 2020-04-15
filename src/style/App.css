@@ -1,0 +1,36 @@
+
+.mlr-10{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.mlr-5{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#load{
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:9999;
+  background:url("../images/loading.gif") no-repeat center center rgba(0,0,0,0.25);
+  background-size: 50px;
+}
+.hide{
+  visibility: hidden;
+}
+.show{
+  visibility: visible;
+}
+.err-msg p{
+  color: #CF000F
+}
+.emp-form{
+  max-width: 500px;
+  margin: 50px auto;
+}
+.flex{
+  display: flex;
+}
+.view-mode input, .view-mode label, .view-mode select{
+  pointer-events: none;
+}
