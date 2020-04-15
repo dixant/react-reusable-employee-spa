@@ -1,6 +1,5 @@
-## Parking-Management
-This is a car parking management application, where all the parking spaces are defined
-with-in the system and been allocated to cars for certain period of time.
+## React-Reusable-Employee-SPA
+This is a employee management CRUD Application, where user can create, remove, update and display the employee details. User need to login in application first. 
 
 ## functionalities:
 1. Signup page with following fields
