@@ -4,6 +4,7 @@ import { showLoader, hideLoader } from '../components/Loader';
 import EmpModal from '../components/EmpModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserEdit, faUserSlash, faEye, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 class Employee extends React.Component {
     constructor(props) {
@@ -294,15 +295,10 @@ class Employee extends React.Component {
                         <Col>
                             <Button className="mlr-10" variant="outline-primary" onClick={this.showModal.bind(this)} >New Employee</Button>
                         </Col>
-                        {/* <Col>
-                            <Form.Control as="select" className="pull-right w-auto mlr-10" value={filterZone} onChange={this.filterZoneHandler.bind(this)} name="filter-zone">
-                                <option value="All">All</option>
-                                {parkingZoneList && parkingZoneList.map((v, i) => (
-                                    <option key={i} value={v}>Zone {v}</option>
-                                ))}
-                            </Form.Control>
-                            <Form.Label className="pull-right w-auto m-7">Filter by Zone: </Form.Label>
-                        </Col> */}
+                        <Col>
+                            <Button className="pull-right w-auto mlr-10 pdf-btn" variant="outline-primary" onClick={this.showModal.bind(this)} ><Link to="/employee-list" className="pdf-link">Print PDF</Link></Button>
+
+                        </Col>
                     </Row>
                     <Table responsive="sm">
                         <thead>
