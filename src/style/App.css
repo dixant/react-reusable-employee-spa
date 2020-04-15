@@ -34,3 +34,15 @@
 .view-mode input, .view-mode label, .view-mode select{
   pointer-events: none;
 }
+.emp-list-pdf{
+  width: 98%;
+  height: 500px;
+  position: absolute;
+}
+.pull-right{
+  float: right;
+}
+.pdf-btn .pdf-link:hover{
+  color: #fff;
+  text-decoration: none;
+}
