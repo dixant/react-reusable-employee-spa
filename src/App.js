@@ -2,7 +2,7 @@ import React from 'react';
 import './style/App.css';
 import { Container } from 'react-bootstrap';
 
-import { Switch, Route, Redirect } from 'react-router';
+import { Switch, Route } from 'react-router';
 import Employee from './pages/employee';
 import Login from './pages/login';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,6 +10,7 @@ import Email from './pages/email';
 import Header from './components/header';
 import Notfound from './pages/notfound';
 import Signup from './pages/signup';
+import EmployeeList from './pages/employeeList';
 function App() {
   let loginId = sessionStorage.getItem('loginId');
   let isLoggedin = false;
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login"><Login /></Route>
           <Route path="/employee">{isLoggedin ? <Employee /> : <Login />}</Route>
           <Route path="/email">{isLoggedin ? <Email /> : <Login />}</Route>
+          <Route path="/employee-list">{isLoggedin ? <EmployeeList /> : <Login />}</Route>
           <Route ><Notfound /></Route>
         </Switch>
       </BrowserRouter>
