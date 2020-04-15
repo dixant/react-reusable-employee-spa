@@ -73,6 +73,7 @@ After login Goto Employee page
 3. react-router
 4. react-router-dom
 5. react-bootstrap
+6. @react-pdf/renderer
 
 ## Available Scripts
 
