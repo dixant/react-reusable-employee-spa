@@ -88,7 +88,7 @@ class Signup extends React.PureComponent {
         showLoader();
         fetch("https://devfrontend.gscmaven.com/wmsweb/webapi/user/signup", request)
             .then(res => {
-                if (res.status == 200) { return res.json() }
+                if (res.status === 200) { return res.json() }
             })
             .then(res => {
                 hideLoader();

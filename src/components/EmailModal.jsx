@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Container, Modal } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 
 const EmailModal = ({ role, showEmailModal, emailModalType, showErrorMsg, errorMsg, submitEmailModal, closeModal, viewData }) => {
     console.log(viewData)
@@ -31,7 +30,7 @@ const EmailModal = ({ role, showEmailModal, emailModalType, showErrorMsg, errorM
         )
     }
     else if (emailModalType === 'view') {
-        let { idtableEmail, tableEmailEmailAddress } = viewData;
+        let { tableEmailEmailAddress } = viewData;
         return (
             <Modal show={showEmailModal} centered className="view-mode">
                 <Modal.Header>

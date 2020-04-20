@@ -1,9 +1,9 @@
 import React from 'react';
-import { Jumbotron, Row, Button, Form, Modal, Col, Table } from 'react-bootstrap';
+import { Jumbotron, Row, Button, Col, Table } from 'react-bootstrap';
 import { showLoader, hideLoader } from '../components/Loader';
 import EmpModal from '../components/EmpModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserEdit, faUserSlash, faEye, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 class Employee extends React.Component {
@@ -181,7 +181,7 @@ class Employee extends React.Component {
                                 empList: [res, ...empListOld]
                             })
                         } else {
-                            let findIndex = empListOld.findIndex(x => x.idtableEmployeeId == res.idtableEmployeeId);
+                            let findIndex = empListOld.findIndex(x => x.idtableEmployeeId === res.idtableEmployeeId);
                             empListOld[findIndex] = res;
                             this.setState({
                                 showEmpModal: false,

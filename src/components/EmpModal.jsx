@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Container, Modal } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 
 const EmpModal = ({ role, showEmpModal, empModalType, showErrorMsg, errorMsg, submitEmpModal, closeModal, viewData }) => {
     console.log(viewData)

@@ -1,5 +1,3 @@
-import React from 'react';
-import {useHistory, Redirect} from 'react-router-dom';
 
 const RouteChange = (path) => {
 

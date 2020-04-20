@@ -5,11 +5,8 @@
 // c. Login :API:- 3
 // After login Goto Employee page
 import React from 'react';
-import LoginForm from '../components/LoginForm'
-import { Form, Button, Row, Container } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import LoginForm from '../components/LoginForm';
 import { showLoader, hideLoader } from '../components/Loader';
-import RouteChange from '../components/RouteChange';
 
 class Login extends React.Component {
     constructor(props) {
@@ -52,11 +49,7 @@ class Login extends React.Component {
         e.stopPropagation();
 
         let formData = e.currentTarget.elements;
-        let pcheck = this.passwordValidate(formData.password.value);
-        // if (!pcheck.result) {
-        //     this.setState({ errorMsg: pcheck.msg, showErrorMsg: true });
-        //     return false;
-        // }
+        
         let header = new Headers({ clientId: 175 });
         header.append("content-type", 'application/json');
         let userPass = formData.password.value;

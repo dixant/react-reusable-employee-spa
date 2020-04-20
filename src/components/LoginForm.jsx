@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Button, Row, Container } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 const LoginForm = ({ onLogin, showErrorMsg, errorMsg }) => {
     return (

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Row, Jumbotron, Button, CardColumns, Card, Table } from 'react-bootstrap';
+import { Row, Jumbotron, Button, Table } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import EmailModal from '../components/EmailModal';
 import { hideLoader, showLoader } from '../components/Loader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 class Email extends React.Component {
     constructor(props) {
@@ -77,7 +77,7 @@ class Email extends React.Component {
                                 emailList: [res, ...emailListOld]
                             })
                         } else {
-                            let findIndex = emailListOld.findIndex(x => x.idtableEmail == res.idtableEmail);
+                            let findIndex = emailListOld.findIndex(x => x.idtableEmail === res.idtableEmail);
                             emailListOld[findIndex] = res;
                             this.setState({
                                 showEmailModal: false,
