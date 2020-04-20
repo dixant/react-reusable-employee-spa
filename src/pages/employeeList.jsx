@@ -73,18 +73,55 @@ const styles = StyleSheet.create({
         borderTopWidth: 0
     },
     tableCellHeader: {
-        margin: "auto",
         margin: 5,
         fontSize: 12,
         fontWeight: 500
     },
     tableCell: {
-        margin: "auto",
         margin: 5,
         fontSize: 10
     }
 });
 
+const GetColumns = ({ columns }) => {
+    return (
+        columns.map((itm) => (
+            <View key={itm.name} style={itm.viewStyle}>
+                <Text style={itm.textStyle}>{itm.name}</Text>
+            </View>
+        ))
+    );
+}
+
+const GetTableTD = ({ data, columns }) => {
+    return (
+        Object.entries(data).map((v, i) => (
+            v[0] !== 'idtableEmployeeId' ?
+                <View style={columns[i - 1].viewStyle}>
+                    <Text style={columns[i - 1].textStyle}>{v[1]}</Text>
+                </View>
+                : null
+        ))
+    )
+}
+const getPdfPage = ({ heading, chunkData, detail }) => {
+    console.log("chunkData: ", chunkData);
+    return (
+        <Page size="A3" style={styles.page} wrap >
+            <Text style={styles.header}>Employee List</Text>
+            <View style={styles.table}>
+                <View style={styles.tableRow}>
+                    <GetColumns columns={heading}></GetColumns>
+                </View>
+                {chunkData.map((v, i) => (
+                    <View style={styles.tableRow}>
+                        <GetTableTD columns={detail} data={v}></GetTableTD>
+                    </View>
+                ))}
+            </View>
+        </Page>
+    );
+}
 class EmployeeList extends React.Component {
     constructor(props) {
         super(props);
@@ -107,76 +144,50 @@ class EmployeeList extends React.Component {
             .then(res => {
                 hideLoader();
                 if (res !== undefined && res !== null && res !== '') {
-                    this.setState({ empList: res })
+                    this.setState({ empList: [...res] })
                 }
             })
             .catch(err => { hideLoader(); console.log(err) })
     }
-
-    render() {
-
-
-        console.log(this.state)
+    getPages() {
         let { empList } = this.state;
+        if (empList.length) {
+            let limit = 40;
+            let totalPages = parseInt(empList.length / limit) + (empList.length % limit > 0);
+            let pageData = [];
+            for (let i = 0; i < totalPages; i++) {
+                let start = limit * i,
+                    end = empList.length > limit ? (start + limit) : empList.length;
+                let chunkData = empList.slice(start, end);
+                let { tableColHeader, tableColHeaderSmall, tableCellHeader, tableCol, tableColSmall, tableCell } = styles;
+                const heading = [
+                    { name: 'Name', viewStyle: tableColHeader, textStyle: tableCellHeader },
+                    { name: 'Email', viewStyle: tableColHeader, textStyle: tableCellHeader },
+                    { name: 'DOB', viewStyle: tableColHeaderSmall, textStyle: tableCellHeader },
+                    { name: 'DOJ', viewStyle: tableColHeaderSmall, textStyle: tableCellHeader },
+                    { name: 'Salary', viewStyle: tableColHeader, textStyle: tableCellHeader },
+                    { name: 'Gender', viewStyle: tableColHeader, textStyle: tableCellHeader },
+                    { name: 'Role', viewStyle: tableColHeader, textStyle: tableCellHeader }];
+                const detail = [
+                    { viewStyle: tableCol, textStyle: tableCell },
+                    { viewStyle: tableCol, textStyle: tableCell },
+                    { viewStyle: tableColSmall, textStyle: tableCell },
+                    { viewStyle: tableColSmall, textStyle: tableCell },
+                    { viewStyle: tableCol, textStyle: tableCell },
+                    { viewStyle: tableCol, textStyle: tableCell },
+                    { viewStyle: tableCol, textStyle: tableCell }];
+                pageData.push(getPdfPage({ heading, chunkData, detail }))
+            }
+            return pageData;
+        }
+        return null;
+    }
+    render() {
         return (
 
             <PDFViewer className="emp-list-pdf">
                 <Document title="Employee List" author="Dixant" subject="Employee Data PDF">
-                    <Page size="A3" style={styles.page} wrap >
-                        <Text style={styles.header}>Employee List</Text>
-                        <View style={styles.table}>
-                            <View style={styles.tableRow}>
-                                <View style={styles.tableColHeader}>
-                                    <Text style={styles.tableCellHeader}>Name</Text>
-                                </View>
-                                <View style={styles.tableColHeader}>
-                                    <Text style={styles.tableCellHeader}>Email</Text>
-                                </View>
-                                <View style={styles.tableColHeaderSmall}>
-                                    <Text style={styles.tableCellHeader}>DOB</Text>
-                                </View>
-                                <View style={styles.tableColHeaderSmall}>
-                                    <Text style={styles.tableCellHeader}>DOJ</Text>
-                                </View>
-                                <View style={styles.tableColHeader}>
-                                    <Text style={styles.tableCellHeader}>Salary</Text>
-                                </View>
-                                <View style={styles.tableColHeader}>
-                                    <Text style={styles.tableCellHeader}>Gender</Text>
-                                </View>
-                                <View style={styles.tableColHeader}>
-                                    <Text style={styles.tableCellHeader}>Role</Text>
-                                </View>
-                            </View>
-                            {empList && empList.map((v, i) => (
-                                <View style={styles.tableRow}>
-                                    <View style={styles.tableCol}>
-                                        <Text style={styles.tableCell}>{v.name}</Text>
-                                    </View>
-                                    <View style={styles.tableCol}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeEmailAddress}</Text>
-                                    </View>
-                                    <View style={styles.tableColSmall}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeDOB}</Text>
-                                    </View>
-                                    <View style={styles.tableColSmall}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeDOJ}</Text>
-                                    </View>
-                                    <View style={styles.tableCol}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeSalary}</Text>
-                                    </View>
-                                    <View style={styles.tableCol}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeGender}</Text>
-                                    </View>
-                                    <View style={styles.tableCol}>
-                                        <Text style={styles.tableCell}>{v.tableEmployeeRole}</Text>
-                                    </View>
-                                </View>
-                            ))}
-
-                        </View>
-                    </Page>
-                    
+                    {this.getPages()}
                 </Document>
             </PDFViewer>
         )
