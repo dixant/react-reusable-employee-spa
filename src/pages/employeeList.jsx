@@ -1,7 +1,6 @@
 import React from 'react';
 import { showLoader, hideLoader } from '../components/Loader';
 import { Document, Page, Text, View, PDFViewer, StyleSheet } from '@react-pdf/renderer';
-//import { Table, TableHeader, TableCell, TableBody, DataTableCell } from '@david.kucsai/react-pdf-table/lib/';
 
 
 const styles = StyleSheet.create({
