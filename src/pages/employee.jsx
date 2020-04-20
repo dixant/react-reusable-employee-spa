@@ -178,7 +178,7 @@ class Employee extends React.Component {
                         if (empModalType === 'create') {
                             this.setState({
                                 showEmpModal: false,
-                                empList: [res, ...empListOld]
+                                empList: [...empListOld, res]
                             })
                         } else {
                             let findIndex = empListOld.findIndex(x => x.idtableEmployeeId === res.idtableEmployeeId);
